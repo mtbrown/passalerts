@@ -1,8 +1,11 @@
 import time
 from selenium import webdriver
+from collections import namedtuple
 
 PASS_URL = "http://pass.calpoly.edu/main.html"
-WATCH_LIST = ["EE 307"]
+WATCH_LIST = ["EE 307", "ENGL 134"]
+
+Section = namedtuple("Section", "course section professor available enrolled waiting")
 
 
 def main():
@@ -10,7 +13,8 @@ def main():
     driver.get(PASS_URL)
 
     select_courses(driver)
-    parse_sections(driver)
+    section_info = parse_sections(driver)
+    print(section_info)
 
 
 def select_courses(driver):
@@ -33,20 +37,23 @@ def select_courses(driver):
 
 
 def parse_sections(driver):
+    section_info = dict.fromkeys(WATCH_LIST)
+
     time.sleep(2)
     selected_courses = driver.find_elements_by_xpath("//div[@class='select-course']")
-
     for course in selected_courses:
         course_name = course.text.split('-')[0].strip()
         if course_name not in WATCH_LIST:
             continue  # Skip classes that aren't in watch list, e.g. labs that are auto added
 
+        section_info[course_name] = []
         for section in course.find_elements_by_xpath("./table/tbody/tr"):
-            info = [elem.text for elem in section.find_elements_by_xpath("./td")]
+            info = [elem.text for elem in section.find_elements_by_xpath("./td[not(.//input)]")]
             if len(info) < 5:
                 continue  # Skip table rows that aren't sections, e.g. "Section Notes"
+            section_info[course_name].append(Section(course_name, info[0], *info[3:7]))
 
-            print(info)
+    return section_info
 
 
 if __name__ == "__main__":
