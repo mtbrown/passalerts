@@ -3,26 +3,34 @@ from selenium import webdriver
 from collections import namedtuple
 
 PASS_URL = "http://pass.calpoly.edu/main.html"
-WATCH_LIST = ["EE 307", "ENGL 134"]
+
+QUARTER = "Fall"
+WATCH_LIST = ["EE 308", "ENGL 134"]
+
 
 Section = namedtuple("Section", "course section professor available enrolled waiting")
 
 
 def main():
-    driver = webdriver.Firefox()
+    driver = webdriver.Chrome()
     driver.get(PASS_URL)
 
-    select_courses(driver)
+    select_courses(driver, WATCH_LIST)
     section_info = parse_sections(driver)
     print(section_info)
 
 
-def select_courses(driver):
-    driver.find_element_by_id("dismissNew").click()  # dismiss "What's New"
+def select_courses(driver, course_list):
+    # if multiple quarters available, select value specified by QUARTER
+    if len(driver.find_elements_by_xpath("//li[contains(text(), 'Select A Quarter')]")):
+        driver.find_element_by_xpath("//button[contains(text(), '{0}')]".format(QUARTER)).click()
+
+    if len(driver.find_elements_by_id("modalNewContainer")):
+        driver.find_element_by_id("dismissNew").click()  # dismiss "What's New"
 
     # Find "Search by Department" list, add each course in watch list
     dept_list = driver.find_element_by_xpath("//select[@class='filter-section border-all'][@data-filter='dept']")
-    for course in WATCH_LIST:
+    for course in course_list:
         dept, course_num = course.split(" ")
         dept_list.find_element_by_xpath("./option[contains(text(), '{0}')]".format(dept)).click()
 
