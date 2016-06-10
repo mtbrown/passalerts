@@ -1,14 +1,15 @@
 import time
 from selenium import webdriver
 from collections import namedtuple
+from tabulate import tabulate
 
 PASS_URL = "http://pass.calpoly.edu/main.html"
 
 QUARTER = "Fall"
-WATCH_LIST = ["EE 308", "ENGL 134"]
+WATCH_LIST = ["EE 308", "ENGL 134", "CPE 464", "CPE 329"]
 
 
-Section = namedtuple("Section", "course section professor available enrolled waiting")
+Section = namedtuple("Section", "course section type number professor available enrolled waiting")
 
 
 def main():
@@ -17,7 +18,8 @@ def main():
 
     select_courses(driver, WATCH_LIST)
     section_info = parse_sections(driver)
-    print(section_info)
+
+    print_sections(section_info)
 
 
 def select_courses(driver, course_list):
@@ -59,9 +61,15 @@ def parse_sections(driver):
             info = [elem.text for elem in section.find_elements_by_xpath("./td[not(.//input)]")]
             if len(info) < 5:
                 continue  # Skip table rows that aren't sections, e.g. "Section Notes"
-            section_info[course_name].append(Section(course_name, info[0], *info[3:7]))
+            section_info[course_name].append(Section(course_name, *info[0:7]))
 
     return section_info
+
+
+def print_sections(section_info):
+    for course, sections in section_info.items():
+        print(tabulate(sections, headers=Section._fields))
+        print()
 
 
 if __name__ == "__main__":
