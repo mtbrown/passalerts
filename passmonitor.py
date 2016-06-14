@@ -2,6 +2,7 @@ import time
 from selenium import webdriver
 from collections import namedtuple
 from tabulate import tabulate
+import logging
 
 PASS_URL = "http://pass.calpoly.edu/main.html"
 
@@ -13,11 +14,17 @@ Section = namedtuple("Section", "course section type number professor available 
 
 
 def main():
+    logging.basicConfig(format='%(asctime)s: [%(levelname)s] %(message)s', level=logging.INFO)
+
     driver = webdriver.Chrome()
+    driver.implicitly_wait(10)
     driver.get(PASS_URL)
 
+    logging.info("Selecting courses")
     select_courses(driver, WATCH_LIST)
+    logging.info("Parsing sections")
     section_info = parse_sections(driver)
+    logging.info("Finished")
 
     print_sections(section_info)
 
@@ -36,20 +43,17 @@ def select_courses(driver, course_list):
         dept, course_num = course.split(" ")
         dept_list.find_element_by_xpath("./option[contains(text(), '{0}')]".format(dept)).click()
 
-        time.sleep(2)
         # Locate course in table by finding 'tr' node with 'td' children containing department and course number
         course_row = driver.find_element_by_xpath(
             "//table/tbody/tr[td[contains(text(), '{0}')] and td[contains(text(), '{1}')]]".format(dept, course_num))
         course_row.find_element_by_css_selector(".btn.btn-select").click()  # click "Select Course"
 
-    time.sleep(2)
     driver.find_element_by_css_selector(".right.btn.btn-next").click()  # Continue to choose sections
 
 
 def parse_sections(driver):
     section_info = dict.fromkeys(WATCH_LIST)
 
-    time.sleep(2)
     selected_courses = driver.find_elements_by_xpath("//div[@class='select-course']")
     for course in selected_courses:
         course_name = course.text.split('-')[0].strip()
