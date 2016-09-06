@@ -1,4 +1,3 @@
-import time
 from selenium import webdriver
 from collections import namedtuple
 from tabulate import tabulate
@@ -18,7 +17,7 @@ def main():
 
     driver = webdriver.Chrome()
     driver.implicitly_wait(10)
-    driver.get(PASS_URL)
+    init_session(driver, PASS_URL, QUARTER)
 
     logging.info("Selecting courses")
     select_courses(driver, WATCH_LIST)
@@ -29,14 +28,18 @@ def main():
     print_sections(section_info)
 
 
-def select_courses(driver, course_list):
-    # if multiple quarters available, select value specified by QUARTER
+def init_session(driver, url, quarter):
+    driver.get(url)
+
+    # if multiple quarters available, select quarter specified by parameter
     if len(driver.find_elements_by_xpath("//li[contains(text(), 'Select A Quarter')]")):
-        driver.find_element_by_xpath("//button[contains(text(), '{0}')]".format(QUARTER)).click()
+        driver.find_element_by_xpath("//button[contains(text(), '{0}')]".format(quarter)).click()
 
     if len(driver.find_elements_by_id("modalNewContainer")):
         driver.find_element_by_id("dismissNew").click()  # dismiss "What's New"
 
+
+def select_courses(driver, course_list):
     # Find "Search by Department" list, add each course in watch list
     dept_list = driver.find_element_by_xpath("//select[@class='filter-section border-all'][@data-filter='dept']")
     for course in course_list:
