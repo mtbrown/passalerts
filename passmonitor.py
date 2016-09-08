@@ -17,7 +17,7 @@ def main():
     logging.basicConfig(format='%(asctime)s: [%(levelname)s] %(message)s', level=logging.INFO)
 
     driver = webdriver.Chrome()
-    driver.implicitly_wait(10)  # wait 10 seconds for elements to load for entire session
+    driver.implicitly_wait(1)  # wait 10 seconds for elements to load for entire session
     init_session(driver, PASS_URL, QUARTER)
 
     logging.info("Selecting courses")
@@ -68,7 +68,7 @@ def parse_sections(soup):
         if course_name not in WATCH_LIST:
             continue  # Skip classes that aren't in watch list, e.g. labs that are auto added
 
-        section_info[course_name] = []
+        section_info[course_name] = {}
         for section in course.find_all("table"):
             for row in section.tbody:
                 if isinstance(row, NavigableString) or row.find(class_="section-notes"):
@@ -82,14 +82,16 @@ def parse_sections(soup):
                 for _ in range(len(Section._fields) - 1):
                     info.append(col.text.strip())
                     col = col.find_next_sibling("td")
-                section_info[course_name].append(Section(course_name, *info))
+
+                section = Section(course_name, *info)
+                section_info[course_name][section.id] = section
 
     return section_info
 
 
 def print_sections(section_info):
     for course, sections in section_info.items():
-        print(tabulate(sections, headers=Section._fields))
+        print(tabulate([info for _, info in sections.items()], headers=Section._fields))
         print()
 
 
