@@ -10,7 +10,7 @@ QUARTER = "Fall"
 WATCH_LIST = ["EE 308", "ENGL 134", "CPE 464", "CPE 329"]
 
 
-Section = namedtuple("Section", "course section type id professor available enrolled waiting")
+Section = namedtuple("Section", "course section type id instructor available enrolled waiting")
 
 
 def main():
