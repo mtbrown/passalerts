@@ -1,35 +1,29 @@
 from selenium import webdriver
-from collections import namedtuple
 from tabulate import tabulate
+from collections import namedtuple
 from bs4 import BeautifulSoup, NavigableString
 import logging
 
 PASS_URL = "http://pass.calpoly.edu/main.html"
 
-QUARTER = "Fall"
-WATCH_LIST = ["EE 308", "ENGL 134", "CPE 464", "CPE 329"]
-
-
 Section = namedtuple("Section", "course section type id instructor available enrolled waiting")
 
 
-def main():
-    logging.basicConfig(format='%(asctime)s: [%(levelname)s] %(message)s', level=logging.INFO)
-
+def scrape_sections(course_list, quarter):
     driver = webdriver.Chrome()
-    driver.implicitly_wait(1)  # wait 10 seconds for elements to load for entire session
-    init_session(driver, PASS_URL, QUARTER)
+    driver.implicitly_wait(1)  # wait 1 second for elements to load for entire session
+    init_session(driver, PASS_URL, quarter)
 
     logging.info("Selecting courses")
-    select_courses(driver, WATCH_LIST)
+    select_courses(driver, course_list)
 
     logging.info("Parsing sections")
     soup = BeautifulSoup(driver.page_source, 'html.parser')
-    section_info = parse_sections(soup)
+    section_info = parse_sections(soup, course_list)
 
     logging.info("Finished")
 
-    print_sections(section_info)
+    return section_info
 
 
 def init_session(driver, url, quarter):
@@ -58,14 +52,14 @@ def select_courses(driver, course_list):
     driver.find_element_by_css_selector(".right.btn.btn-next").click()  # Continue to choose sections
 
 
-def parse_sections(soup):
-    section_info = dict.fromkeys(WATCH_LIST)
+def parse_sections(soup, course_list):
+    section_info = dict.fromkeys(course_list)
 
     selected_courses = soup.find_all(class_="select-course")
     for course in selected_courses:
         course_name = course.text.split('-')[0].strip()
         course_name = " ".join(course_name.split())  # remove duplicate spaces
-        if course_name not in WATCH_LIST:
+        if course_name not in course_list:
             continue  # Skip classes that aren't in watch list, e.g. labs that are auto added
 
         section_info[course_name] = {}
@@ -93,7 +87,3 @@ def print_sections(section_info):
     for course, sections in section_info.items():
         print(tabulate([info for _, info in sections.items()], headers=Section._fields))
         print()
-
-
-if __name__ == "__main__":
-    main()
