@@ -20,7 +20,11 @@ REQUIRED = {
 
 
 def parse_config(config_file):
-    config = {}
+    config = {
+        'quarter': None,
+        'course_list': [],
+        'events': {}
+    }
 
     parser = configparser.ConfigParser()
     parser.read(config_file)
@@ -34,8 +38,22 @@ def parse_config(config_file):
         return None
 
     # Remaining sections specify courses that should be monitored
-    for section in parser.sections().remove('Settings'):
-        pass
+    for section in parser.sections():
+        if section in REQUIRED:
+            continue
+        if not parser[section].getboolean('enabled', fallback=False):
+            continue
+
+        config['course_list'].append(section)
+        events = parser[section].get('events', fallback="")
+        config['events'][section] = str_to_list(events)
+
+    return config
+
+
+def str_to_list(s):
+    table = str.maketrans('', '', '[]" ')  # delete '[', ']', '"', and ' ' characters
+    return s.strip().translate(table).split(',')
 
 
 def verify_config(parser):
