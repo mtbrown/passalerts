@@ -4,7 +4,7 @@ import sys
 
 from scrape import scrape_sections, print_sections
 from events import check_events
-from config import parse_config
+from config import parse_config, parse_subscriptions
 
 DB_FILE = 'pass.db'
 CONFIG_FILE = 'pass.conf'
@@ -17,11 +17,13 @@ def main():
     if config is None:
         sys.exit()
 
-    cur_sections = scrape_sections(["CPE 357", "CPE 329", "CPE 321"], 'Fall')
+    subscriptions = parse_subscriptions(config)
+
+    cur_sections = scrape_sections(subscriptions.keys(), config['Settings']['quarter'])
     print_sections(cur_sections)
 
     with shelve.open(DB_FILE) as prev_sections:
-        check_events(None, prev_sections, cur_sections)  # TODO: parse event list from config
+        check_events(subscriptions, prev_sections, cur_sections)
         prev_sections.update(cur_sections)
 
 

@@ -1,5 +1,6 @@
 import configparser
 import logging
+from collections import namedtuple
 
 
 # Specifies the required sections and parameters expected in the configuration file.
@@ -13,42 +14,37 @@ REQUIRED = {
     },
     'Notifications': {
         'service': {
-            'pushbullet': ('api_key', )
+            'pushbullet': ('api_key', ),
+            'pushover': ('api_key', 'user_key')
         }
     }
 }
 
+Subscription = namedtuple("Subscription", "course sections events")
+
 
 def parse_config(config_file):
-    config = {
-        'quarter': None,
-        'course_list': [],
-        'events': {}
-    }
-
     parser = configparser.ConfigParser()
     parser.read(config_file)
 
     if not verify_config(parser):
         return None
 
-    config['quarter'] = parser['Settings']['quarter']
-    if config['quarter'] is None or config['quarter'] not in ('Fall', 'Winter', 'Spring', 'Summer'):
-        logging.error('Invalid quarter parameter in {0}: {1}'.format(config_file, config['quarter']))
-        return None
+    return parser
 
-    # Remaining sections specify courses that should be monitored
-    for section in parser.sections():
+
+def parse_subscriptions(config):
+    subscriptions = {}
+    for section in config.sections():
         if section in REQUIRED:
             continue
-        if not parser[section].getboolean('enabled', fallback=False):
+        if not config[section].getboolean('enabled', fallback=False):
             continue
 
-        config['course_list'].append(section)
-        events = parser[section].get('events', fallback="")
-        config['events'][section] = str_to_list(events)
-
-    return config
+        events = config[section].get('events', fallback="")
+        sections = config[section].get('sections', fallback="")
+        subscriptions[section] = Subscription(section, str_to_list(sections), str_to_list(events))
+    return subscriptions
 
 
 def str_to_list(s):
@@ -82,6 +78,3 @@ def verify_config(parser):
                             dependency, arg, setting))
                         return False
     return True
-
-
-
