@@ -2,6 +2,7 @@ import logging
 import shelve
 import sys
 import os
+import time
 
 from .events import check_events
 from .notifications import notify
@@ -24,13 +25,18 @@ def main():
 
     subscriptions = parse_subscriptions(config)
 
-    cur_courses = scrape_sections(subscriptions.keys(), config['Settings']['quarter'])
-    print_sections(cur_courses)
+    while True:
+        cur_courses = scrape_sections(subscriptions.keys(), config['Settings']['quarter'])
+        print_sections(cur_courses)
 
-    with shelve.open(DB_FILE) as prev_courses:
-        for event in check_events(subscriptions, prev_courses, cur_courses):
-            notify(config, event.message)
-        prev_courses.update(cur_courses)
+        with shelve.open(DB_FILE) as prev_courses:
+            for event in check_events(subscriptions, prev_courses, cur_courses):
+                notify(config, event.message)
+            prev_courses.update(cur_courses)
+
+        if config['Settings'].get('mode', fallback='') != 'continuous':
+            break
+        time.sleep(max(config['Settings'].getint('delay'), 5) * 60)
 
 
 if __name__ == '__main__':

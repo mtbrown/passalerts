@@ -11,6 +11,10 @@ from collections import namedtuple
 REQUIRED = {
     'Settings': {
         'quarter': ('Fall', 'Winter', 'Spring', 'Summer'),
+        'mode': {
+            'continuous': ('delay', ),
+            'cron': None
+        }
     },
     'Notifications': {
         'service': {
@@ -71,10 +75,10 @@ def verify_config(parser):
                 return False
 
             # Verify that other parameter dependencies are also fulfilled
-            if valid_args and isinstance(valid_args, dict):
+            if valid_args and isinstance(valid_args, dict) and valid_args[arg]:
                 for dependency in valid_args[arg]:
                     if dependency not in parser[section]:
-                        logging.error('"{0}" parameter required when using "{1}" for "{2}'.format(
+                        logging.error('"{0}" parameter required when using "{1}" for "{2}"'.format(
                             dependency, arg, setting))
                         return False
     return True
