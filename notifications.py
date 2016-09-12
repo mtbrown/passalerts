@@ -16,5 +16,5 @@ notify_handlers = {
 }
 
 
-def notify(config, message, title):
+def notify(config, message, title="PASS Monitor"):
     notify_handlers[config['Notifications']['client']](config, message, title)
