@@ -68,16 +68,20 @@ def parse_sections(soup, course_list):
                 if isinstance(row, NavigableString) or row.find(class_="section-notes"):
                     continue  # skip rows containing section notes
 
+                # All table rows containing section info start with this identifier, use as reference
                 col = row.find(class_="sectionNumber")
                 if col is None:
                     continue
 
+                # Traverse columns for each field of a new Section
                 info = []
                 for _ in range(len(Section._fields) - 1):
                     info.append(col.text.strip())
                     col = col.find_next_sibling("td")
 
-                section = Section(course_name, *info)
+                section = Section(course=course_name, section=info[0], type=info[1],
+                                  id=info[2], instructor=info[3], available=int(info[4]),
+                                  enrolled=int(info[5]), waiting=int(info[6]))
                 section_info[course_name][section.id] = section
 
     return section_info
