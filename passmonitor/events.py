@@ -4,6 +4,7 @@ from collections import namedtuple
 
 Event = namedtuple('Event', 'event message course section')
 
+
 def check_available(prev_sections, cur_sections):
     """
     Checks if there are currently seats available in the section list. If there were already

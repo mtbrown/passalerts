@@ -1,14 +1,18 @@
 import logging
 import shelve
 import sys
+import os
 
-from scrape import scrape_sections, print_sections
-from events import check_events
-from config import parse_config, parse_subscriptions
-from notifications import notify
+from .events import check_events
+from .notifications import notify
+from .scrape import scrape_sections, print_sections
 
-DB_FILE = 'pass.db'
-CONFIG_FILE = 'pass.conf'
+from passmonitor.config import parse_config, parse_subscriptions
+
+
+BASE_DIR = os.path.dirname(os.path.realpath(__file__))
+DB_FILE = os.path.realpath(os.path.join(BASE_DIR, os.pardir, 'pass.db'))  # ../pass.db
+CONFIG_FILE = os.path.realpath(os.path.join(BASE_DIR, os.pardir, 'pass.conf'))  # ../pass.conf
 
 
 def main():
