@@ -21,8 +21,8 @@ def scrape_sections(course_list, config):
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     section_info = parse_sections(soup, course_list)
 
+    driver.quit()
     logging.info("Finished")
-
     return section_info
 
 
