@@ -14,7 +14,8 @@ REQUIRED = {
         'mode': {
             'continuous': ('delay', ),
             'cron': None
-        }
+        },
+        'driver': ('Chrome', 'Firefox', 'PhantomJS')
     },
     'Notifications': {
         'service': {

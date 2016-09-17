@@ -26,7 +26,7 @@ def main():
     subscriptions = parse_subscriptions(config)
 
     while True:
-        cur_courses = scrape_sections(subscriptions.keys(), config['Settings']['quarter'])
+        cur_courses = scrape_sections(subscriptions.keys(), config)
         print_sections(cur_courses)
 
         with shelve.open(DB_FILE) as prev_courses:
