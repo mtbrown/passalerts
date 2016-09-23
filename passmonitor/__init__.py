@@ -6,7 +6,7 @@ import time
 
 from .events import check_events
 from .notifications import notify
-from .scrape import scrape_sections, print_sections
+from .scrape import scrape_courses, print_sections
 
 from passmonitor.config import parse_config, parse_subscriptions
 
@@ -26,7 +26,7 @@ def main():
     subscriptions = parse_subscriptions(config)
 
     while True:
-        cur_courses = scrape_sections(subscriptions.keys(), config)
+        cur_courses = scrape_courses(subscriptions.keys(), config)
         print_sections(cur_courses)
 
         with shelve.open(DB_FILE) as prev_courses:

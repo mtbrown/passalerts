@@ -9,7 +9,8 @@ PASS_URL = "http://pass.calpoly.edu/main.html"
 Section = namedtuple("Section", "course section type id instructor available enrolled waiting")
 
 
-def scrape_sections(course_list, config):
+def scrape_courses(course_list, config):
+    logging.info("Initializing webdriver")
     driver = getattr(webdriver, config['Settings']['driver'])()
     driver.implicitly_wait(1)  # wait 1 second for elements to load for entire session
     init_session(driver, PASS_URL, config['Settings']['quarter'])
