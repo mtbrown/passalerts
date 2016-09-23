@@ -8,7 +8,7 @@ from .events import check_events
 from .notifications import notify
 from .scrape import scrape_courses, print_sections
 
-from passmonitor.config import parse_config, parse_subscriptions
+from passalerts.config import parse_config, parse_subscriptions
 
 
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))

@@ -1,4 +1,4 @@
-from passmonitor import main
+from passalerts import main
 
 
 if __name__ == '__main__':
