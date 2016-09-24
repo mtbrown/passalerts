@@ -32,10 +32,10 @@ def check_instructor_change(prev_sections, cur_sections):
     """
     Checks if the instructor has been modified for any of the sections.
     """
-    for id, section in prev_sections.items():
-        if id not in cur_sections:
-            continue  # section was removed since last update
-        if section.instructor != cur_sections[id].instructor:
+    for id, section in cur_sections.items():
+        if id not in prev_sections:
+            continue  # section was added since last update
+        if section.instructor != prev_sections[id].instructor:
             yield (section, section.instructor)
 
 
