@@ -1,5 +1,5 @@
 from passalerts.scrape import Section
-from passalerts.events import check_available, check_new_section, check_instructor_change
+from passalerts.events import check_available, check_new_section, check_instructor_change, check_events
 
 
 def test_check_available():
@@ -156,11 +156,3 @@ def test_check_instructor_change():
 
     results = list(check_new_section(prev, prev))
     assert len(results) == 0
-
-
-def test_check_events():
-    pass
-
-
-def test_check_events_section_removed():
-    pass

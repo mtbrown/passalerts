@@ -1,0 +1,4778 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+  <meta content="width=device-width, initial-scale=1.0 user-scalable=0" name="viewport"/>
+  <link href="css/normalize.css" rel="stylesheet"/>
+  <link href="css/styles.css?v=6e2bee57be695de5dc763330ae33b4c2" rel="stylesheet"/>
+  <link href="css/jquery.qtip.min.css" rel="stylesheet"/>
+  <script src="js/desktop/jquery-1.10.2.min.js">
+  </script>
+  <!-- IE8 Win XP fix -->
+  <script type="text/javascript">
+   if (!window.console) console = {log: function() {}};
+  </script>
+ </head>
+ <!-- PASS Version: jenkins-Plan A Student Schedule-112 -->
+ <body>
+  <div class="page-wrapper">
+   <div class="pageHeader clearfix">
+    <div class="headerLeft left">
+     <div class="cp-logo">
+      <a href="/" title="Return to main page">
+       <img src="images/cp_logo.png"/>
+      </a>
+     </div>
+     <div class="pageTitle clearfix">
+      <img class="pageTitleImg" src="images/passGeneral.png"/>
+      <div class="pageTitleQuarter">
+       Fall Quarter 2016
+      </div>
+     </div>
+    </div>
+    <div class="headerRight right">
+     <div class="right">
+      <a href="login.do">
+       Log in
+      </a>
+     </div>
+     <div class="right" style="clear:both;">
+      <strong>
+       You are here as a Guest.
+      </strong>
+      <br/>
+      If you wish to save schedules, view previously saved schedules, or view book information, please log in.
+     </div>
+    </div>
+   </div>
+   <div class="content-wrapper clearfix" data-role="content">
+    <div class="steps clearfix">
+     <ul class="list-plain">
+      <li class="completed">
+       1. Select Courses/Set Availability
+      </li>
+      <li class="active">
+       2. Choose Sections
+      </li>
+      <li>
+       3. Select Schedule
+      </li>
+      <li>
+       4. View &amp; Save Schedule
+      </li>
+      <li>
+       5. Push to Student Center
+      </li>
+     </ul>
+     <div class="right">
+      <a class="right btn btn-next" data-direction="next" id="generateSchedulesBtn">
+       Next: Select Schedule
+      </a>
+      <a class="right btn btn-gray" href="prev.do" id="prevBtn">
+       Previous
+      </a>
+     </div>
+    </div>
+    <div class="main-content-wrapper clearfix">
+     <div class="sidebar">
+      <ul class="cart cart-bordered container-border-all clearfix" id="cart-list-view">
+       <li id="cart-list-divider">
+        Selected Courses
+        <a class="detail cart-action" id="removeAllCourses">
+         Remove All
+        </a>
+       </li>
+       <li class="clearfix">
+        <div class="left cart-title">
+         EE  308 - Analog Electronics and Integrated Circuits
+        </div>
+        <a class="detail cart-action" data-id="60474">
+         Remove
+        </a>
+       </li>
+       <li class="clearfix">
+        <div class="left cart-title">
+         ENGL  134 - Writing and Rhetoric
+        </div>
+        <a class="detail cart-action" data-id="59674">
+         Remove
+        </a>
+       </li>
+       <li class="clearfix">
+        <div class="left cart-title">
+         CPE  464 - Introduction to Computer Networks
+        </div>
+        <a class="detail cart-action" data-id="60444">
+         Remove
+        </a>
+       </li>
+       <li class="clearfix">
+        <div class="left cart-title">
+         CPE  329 - Programmable Logic and Microprocessor-Based Systems Design
+        </div>
+        <a class="detail cart-action" data-id="60007">
+         Remove
+        </a>
+       </li>
+      </ul>
+      <ul class="cart cart-bordered container-border-all clearfix">
+       <li class="cart-list-divider">
+        Key
+       </li>
+       <li class="clearfix">
+        <span class="key-closed">
+         Section closed
+        </span>
+       </li>
+       <li class="clearfix">
+        <span class="key-cancel">
+         Section cancelled
+        </span>
+       </li>
+       <li class="clearfix">
+        <span class="key-avail">
+         Section conflicts with your availability
+        </span>
+       </li>
+       <li class="clearfix">
+        <span class="key-online">
+         * Section offered in an online format
+        </span>
+       </li>
+      </ul>
+     </div>
+     <div class="content">
+      <div class="container-border-all" id="error" style="display:none;">
+       <span>
+        Please fix the following errors before continuing
+       </span>
+       <ul class="list-plain" id="errorList">
+       </ul>
+      </div>
+      <div class="select-course">
+       <h3 class="">
+        EE  308 - Analog Electronics and Integrated Circuits — Units:
+						3
+        <a class="view-map" href="map.html?type=course&amp;courseId=60474">
+         <i class="map-white">
+         </i>
+         <span>
+          View all sections on map
+         </span>
+        </a>
+       </h3>
+       <table class="no-bg">
+        <thead>
+         <tr>
+          <th>
+           Include
+          </th>
+          <th>
+           Sec.
+          </th>
+          <th>
+           Type
+          </th>
+          <th>
+           Class #
+          </th>
+          <th>
+           Instructor
+          </th>
+          <th>
+           Avail.
+          </th>
+          <th>
+           Taken
+          </th>
+          <th>
+           Waiting
+          </th>
+          <th>
+           Status
+          </th>
+          <th>
+           Days
+          </th>
+          <th>
+           Start
+          </th>
+          <th>
+           End
+          </th>
+          <th>
+           Building
+          </th>
+          <th>
+           Room
+          </th>
+          <th>
+           Books
+          </th>
+         </tr>
+        </thead>
+        <tbody>
+         <tr class="row-white">
+          <td rowspan="2">
+           <input checked="true" class="left" data-id="159398" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Contact department for permission to enroll. Please do not contact the professor. Come into the EE office (Bldg. 20A, Room 200) to fill out the permission form. Course co-requisite required, see Catalog. A waitlist is not available for this course, because it requires concurrent enrollment in another course.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-white ">
+          <td class="sectionNumber">
+           01
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           2516
+          </td>
+          <td>
+           Smilkstein,Tina Harriet
+          </td>
+          <td>
+           9
+          </td>
+          <td>
+           27
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           Open
+          </td>
+          <td>
+           MWF
+          </td>
+          <td>
+           11:10 AM
+          </td>
+          <td>
+           12:00 PM
+          </td>
+          <td>
+           Const Innovations Center - 186
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=60474&amp;meetingId=173781">
+            <i class="map-gray">
+            </i>
+            <span>
+             C302
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+      <div class="select-course">
+       <h3 class="">
+        ENGL  134 - Writing and Rhetoric — Units:
+						4
+        <span class="ge-tag">
+         GE
+        </span>
+        GEA1
+        <a class="view-map" href="map.html?type=course&amp;courseId=59674">
+         <i class="map-white">
+         </i>
+         <span>
+          View all sections on map
+         </span>
+        </a>
+       </h3>
+       <table class="no-bg">
+        <thead>
+         <tr>
+          <th>
+           Include
+          </th>
+          <th>
+           Sec.
+          </th>
+          <th>
+           Type
+          </th>
+          <th>
+           Class #
+          </th>
+          <th>
+           Instructor
+          </th>
+          <th>
+           Avail.
+          </th>
+          <th>
+           Taken
+          </th>
+          <th>
+           Waiting
+          </th>
+          <th>
+           Status
+          </th>
+          <th>
+           Days
+          </th>
+          <th>
+           Start
+          </th>
+          <th>
+           End
+          </th>
+          <th>
+           Building
+          </th>
+          <th>
+           Room
+          </th>
+          <th>
+           Books
+          </th>
+         </tr>
+        </thead>
+        <tbody>
+         <tr class="row-gray">
+          <td rowspan="2">
+           <input class="left" data-id="163303" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td class="sectionNumber">
+           01
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           2573
+          </td>
+          <td>
+           Green,Sean M
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           4
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           MWRF
+          </td>
+          <td>
+           10:10 AM
+          </td>
+          <td>
+           11:00 AM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178554">
+            <i class="map-gray">
+            </i>
+            <span>
+             0219
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white">
+          <td rowspan="2">
+           <input class="left" data-id="163300" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-white key-closed ">
+          <td class="sectionNumber">
+           03
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           1558
+          </td>
+          <td>
+           Preston,Alison TJ
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           M
+          </td>
+          <td>
+           9:10 AM
+          </td>
+          <td>
+           10:00 AM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178551">
+            <i class="map-gray">
+            </i>
+            <span>
+             0218
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td colspan="9">
+          </td>
+          <td>
+           T
+          </td>
+          <td>
+           9:10 AM
+          </td>
+          <td>
+           10:00 AM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178552">
+            <i class="map-gray">
+            </i>
+            <span>
+             0219
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white key-closed ">
+          <td colspan="9">
+          </td>
+          <td>
+           W
+          </td>
+          <td>
+           9:10 AM
+          </td>
+          <td>
+           10:00 AM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178550">
+            <i class="map-gray">
+            </i>
+            <span>
+             0220
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td colspan="9">
+          </td>
+          <td>
+           R
+          </td>
+          <td>
+           9:10 AM
+          </td>
+          <td>
+           10:00 AM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178553">
+            <i class="map-gray">
+            </i>
+            <span>
+             0311
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white">
+          <td rowspan="2">
+           <input class="left" data-id="163299" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-white key-closed ">
+          <td class="sectionNumber">
+           04
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           2627
+          </td>
+          <td>
+           Preston,Alison TJ
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           23
+          </td>
+          <td>
+           1
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           M
+          </td>
+          <td>
+           10:10 AM
+          </td>
+          <td>
+           11:00 AM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178555">
+            <i class="map-gray">
+            </i>
+            <span>
+             0218
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td colspan="9">
+          </td>
+          <td>
+           T
+          </td>
+          <td>
+           10:10 AM
+          </td>
+          <td>
+           11:00 AM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178556">
+            <i class="map-gray">
+            </i>
+            <span>
+             0219
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white key-closed ">
+          <td colspan="9">
+          </td>
+          <td>
+           W
+          </td>
+          <td>
+           10:10 AM
+          </td>
+          <td>
+           11:00 AM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178558">
+            <i class="map-gray">
+            </i>
+            <span>
+             0220
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td colspan="9">
+          </td>
+          <td>
+           R
+          </td>
+          <td>
+           10:10 AM
+          </td>
+          <td>
+           11:00 AM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178557">
+            <i class="map-gray">
+            </i>
+            <span>
+             0311
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white">
+          <td rowspan="2">
+           <input class="left" data-id="163298" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-white key-closed ">
+          <td class="sectionNumber">
+           05
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           1556
+          </td>
+          <td>
+           Green,Sean M
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           23
+          </td>
+          <td>
+           1
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           MWRF
+          </td>
+          <td>
+           8:10 AM
+          </td>
+          <td>
+           9:00 AM
+          </td>
+          <td>
+           Engineering West - 21
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178549">
+            <i class="map-gray">
+            </i>
+            <span>
+             0204
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray">
+          <td rowspan="2">
+           <input class="left" data-id="163394" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td class="sectionNumber">
+           06
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           14844
+          </td>
+          <td>
+           Pignatelli,Savannah Kathlene
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           TR
+          </td>
+          <td>
+           6:10 PM
+          </td>
+          <td>
+           8:00 PM
+          </td>
+          <td>
+           Alan A Erhart Agriculture - 10
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178670">
+            <i class="map-gray">
+            </i>
+            <span>
+             0231
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white">
+          <td rowspan="2">
+           <input class="left" data-id="163302" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-white key-closed ">
+          <td class="sectionNumber">
+           07
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           2868
+          </td>
+          <td>
+           Senn,Melanie R
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           8
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           TR
+          </td>
+          <td>
+           10:10 AM
+          </td>
+          <td>
+           12:00 PM
+          </td>
+          <td>
+           Arch &amp; Envr  Design - 05
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178559">
+            <i class="map-gray">
+            </i>
+            <span>
+             0225
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray">
+          <td rowspan="2">
+           <input class="left" data-id="163301" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td class="sectionNumber">
+           08
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           2893
+          </td>
+          <td>
+           Bates,Brian R
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           2
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           MTRF
+          </td>
+          <td>
+           9:10 AM
+          </td>
+          <td>
+           10:00 AM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178560">
+            <i class="map-gray">
+            </i>
+            <span>
+             0220
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white key-closed ">
+          <td>
+           <input class="left" data-id="159127" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td class="sectionNumber">
+           09
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           4289
+          </td>
+          <td>
+           Bates,Brian R
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           1
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           MTRF
+          </td>
+          <td>
+           8:10 AM
+          </td>
+          <td>
+           9:00 AM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=177900">
+            <i class="map-gray">
+            </i>
+            <span>
+             0220
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray">
+          <td rowspan="2">
+           <input class="left" data-id="163309" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td class="sectionNumber">
+           11
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           3752
+          </td>
+          <td>
+           St. John,Leslie A
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           2
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           TR
+          </td>
+          <td>
+           5:10 PM
+          </td>
+          <td>
+           7:00 PM
+          </td>
+          <td>
+           Math &amp; Science - 38
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178577">
+            <i class="map-gray">
+            </i>
+            <span>
+             0222
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white">
+          <td rowspan="2">
+           <input class="left" data-id="163308" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-white key-closed ">
+          <td class="sectionNumber">
+           12
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           3769
+          </td>
+          <td>
+           Wishnewsky,Sarah M
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           1
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           MW
+          </td>
+          <td>
+           6:10 PM
+          </td>
+          <td>
+           8:00 PM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178578">
+            <i class="map-gray">
+            </i>
+            <span>
+             0315
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray">
+          <td rowspan="2">
+           <input class="left" data-id="163402" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td class="sectionNumber">
+           13
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           3770
+          </td>
+          <td>
+           Johnston,Sarah Ruth
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           23
+          </td>
+          <td>
+           2
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           MTRF
+          </td>
+          <td>
+           10:10 AM
+          </td>
+          <td>
+           11:00 AM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178676">
+            <i class="map-gray">
+            </i>
+            <span>
+             0220
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white">
+          <td rowspan="2">
+           <input class="left" data-id="163306" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-white key-closed ">
+          <td class="sectionNumber">
+           14
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           3771
+          </td>
+          <td>
+           Ruszczycky,Steven A
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           MTWR
+          </td>
+          <td>
+           6:10 PM
+          </td>
+          <td>
+           7:00 PM
+          </td>
+          <td>
+           Const Innovations Center - 186
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178579">
+            <i class="map-gray">
+            </i>
+            <span>
+             C101
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray">
+          <td rowspan="2">
+           <input class="left" data-id="163404" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td class="sectionNumber">
+           15
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           3772
+          </td>
+          <td>
+           Ferree,Scott A
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           23
+          </td>
+          <td>
+           1
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           M
+          </td>
+          <td>
+           4:10 PM
+          </td>
+          <td>
+           5:00 PM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178680">
+            <i class="map-gray">
+            </i>
+            <span>
+             0218
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white key-closed ">
+          <td colspan="9">
+          </td>
+          <td>
+           T
+          </td>
+          <td>
+           4:10 PM
+          </td>
+          <td>
+           5:00 PM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178681">
+            <i class="map-gray">
+            </i>
+            <span>
+             0219
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td colspan="9">
+          </td>
+          <td>
+           W
+          </td>
+          <td>
+           4:10 PM
+          </td>
+          <td>
+           5:00 PM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178683">
+            <i class="map-gray">
+            </i>
+            <span>
+             0220
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white key-closed ">
+          <td colspan="9">
+          </td>
+          <td>
+           R
+          </td>
+          <td>
+           4:10 PM
+          </td>
+          <td>
+           5:00 PM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178682">
+            <i class="map-gray">
+            </i>
+            <span>
+             0311
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray">
+          <td rowspan="2">
+           <input class="left" data-id="163305" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td class="sectionNumber">
+           16
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           3965
+          </td>
+          <td>
+           Bartel,Jonathan Eric
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           2
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           MWRF
+          </td>
+          <td>
+           10:10 AM
+          </td>
+          <td>
+           11:00 AM
+          </td>
+          <td>
+           Engineering West - 21
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178580">
+            <i class="map-gray">
+            </i>
+            <span>
+             0204
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white">
+          <td rowspan="2">
+           <input class="left" data-id="163480" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-white key-closed ">
+          <td class="sectionNumber">
+           17
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           3969
+          </td>
+          <td>
+           Belknap,Jacquelyn N
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           1
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           TR
+          </td>
+          <td>
+           7:10 AM
+          </td>
+          <td>
+           9:00 AM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178769">
+            <i class="map-gray">
+            </i>
+            <span>
+             0210
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray">
+          <td rowspan="2">
+           <input class="left" data-id="163307" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td class="sectionNumber">
+           18
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           3973
+          </td>
+          <td>
+           St. John,Leslie A
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           TR
+          </td>
+          <td>
+           7:10 PM
+          </td>
+          <td>
+           9:00 PM
+          </td>
+          <td>
+           Math &amp; Science - 38
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178583">
+            <i class="map-gray">
+            </i>
+            <span>
+             0222
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white">
+          <td rowspan="2">
+           <input class="left" data-id="163401" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-white key-closed ">
+          <td class="sectionNumber">
+           19
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           3970
+          </td>
+          <td>
+           Fetters,Ian J
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           6
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           MTRF
+          </td>
+          <td>
+           11:10 AM
+          </td>
+          <td>
+           12:00 PM
+          </td>
+          <td>
+           Engineering East - 20
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178677">
+            <i class="map-gray">
+            </i>
+            <span>
+             0143
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray">
+          <td rowspan="2">
+           <input class="left" data-id="163287" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td class="sectionNumber">
+           20
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           3971
+          </td>
+          <td>
+           Gotsick,Jonathan Sawyer
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           23
+          </td>
+          <td>
+           2
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           MWRF
+          </td>
+          <td>
+           2:10 PM
+          </td>
+          <td>
+           3:00 PM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178582">
+            <i class="map-gray">
+            </i>
+            <span>
+             0219
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white">
+          <td rowspan="2">
+           <input class="left" data-id="163290" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-white key-closed ">
+          <td class="sectionNumber">
+           21
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           4051
+          </td>
+          <td>
+           Bartel,Jonathan Eric
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           MWRF
+          </td>
+          <td>
+           9:10 AM
+          </td>
+          <td>
+           10:00 AM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178584">
+            <i class="map-gray">
+            </i>
+            <span>
+             0219
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray">
+          <td rowspan="2">
+           <input class="left" data-id="163289" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td class="sectionNumber">
+           22
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           4269
+          </td>
+          <td>
+           Bates,Brian R
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           2
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           MTRF
+          </td>
+          <td>
+           11:10 AM
+          </td>
+          <td>
+           12:00 PM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178587">
+            <i class="map-gray">
+            </i>
+            <span>
+             0220
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white">
+          <td rowspan="2">
+           <input class="left" data-id="163288" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-white key-closed ">
+          <td class="sectionNumber">
+           23
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           4270
+          </td>
+          <td>
+           Smith,Daniel T
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           2
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           MW
+          </td>
+          <td>
+           4:10 PM
+          </td>
+          <td>
+           6:00 PM
+          </td>
+          <td>
+           Engineering West - 21
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178588">
+            <i class="map-gray">
+            </i>
+            <span>
+             0204
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray">
+          <td rowspan="2">
+           <input class="left" data-id="163384" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td class="sectionNumber">
+           24
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           4271
+          </td>
+          <td>
+           Brinkmeyer,Emma E
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           23
+          </td>
+          <td>
+           1
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           MW
+          </td>
+          <td>
+           4:10 PM
+          </td>
+          <td>
+           6:00 PM
+          </td>
+          <td>
+           Engineering East - 20
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178662">
+            <i class="map-gray">
+            </i>
+            <span>
+             0129
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white key-closed ">
+          <td>
+           <input class="left" data-id="159085" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td class="sectionNumber">
+           25
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           4272
+          </td>
+          <td>
+           Smith,Daniel T
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           3
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           MW
+          </td>
+          <td>
+           6:10 PM
+          </td>
+          <td>
+           8:00 PM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=175047">
+            <i class="map-gray">
+            </i>
+            <span>
+             0218
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray">
+          <td rowspan="2">
+           <input class="left" data-id="163383" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td class="sectionNumber">
+           26
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           4273
+          </td>
+          <td>
+           Sanders,Kristin D
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           23
+          </td>
+          <td>
+           2
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           MW
+          </td>
+          <td>
+           2:10 PM
+          </td>
+          <td>
+           4:00 PM
+          </td>
+          <td>
+           Food Processing -24
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178663">
+            <i class="map-gray">
+            </i>
+            <span>
+             0108
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white">
+          <td rowspan="2">
+           <input checked="true" class="left" data-id="163286" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-white ">
+          <td class="sectionNumber">
+           27
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           4645
+          </td>
+          <td>
+           Green,Sean M
+          </td>
+          <td>
+           1
+          </td>
+          <td>
+           21
+          </td>
+          <td>
+           1
+          </td>
+          <td>
+           Open
+          </td>
+          <td>
+           MWRF
+          </td>
+          <td>
+           7:10 AM
+          </td>
+          <td>
+           8:00 AM
+          </td>
+          <td>
+           Alan A Erhart Agriculture - 10
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178593">
+            <i class="map-gray">
+            </i>
+            <span>
+             0225
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray">
+          <td rowspan="2">
+           <input class="left" data-id="163285" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td class="sectionNumber">
+           28
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           4649
+          </td>
+          <td>
+           Green,Sean M
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           MWRF
+          </td>
+          <td>
+           9:10 AM
+          </td>
+          <td>
+           10:00 AM
+          </td>
+          <td>
+           Engineering East - 20
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178594">
+            <i class="map-gray">
+            </i>
+            <span>
+             0143
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white">
+          <td rowspan="2">
+           <input checked="true" class="left" data-id="163385" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-white ">
+          <td class="sectionNumber">
+           30
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           6862
+          </td>
+          <td>
+           Marini,Amelia Lynn
+          </td>
+          <td>
+           1
+          </td>
+          <td>
+           21
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           Open
+          </td>
+          <td>
+           TWRF
+          </td>
+          <td>
+           7:10 AM
+          </td>
+          <td>
+           8:00 AM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178668">
+            <i class="map-gray">
+            </i>
+            <span>
+             0218
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray">
+          <td rowspan="2">
+           <input class="left" data-id="163397" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td class="sectionNumber">
+           31
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           4651
+          </td>
+          <td>
+           Bradfield,Scott M
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           MW
+          </td>
+          <td>
+           5:10 PM
+          </td>
+          <td>
+           7:00 PM
+          </td>
+          <td>
+           Alan A Erhart Agriculture - 10
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178671">
+            <i class="map-gray">
+            </i>
+            <span>
+             0227
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white">
+          <td rowspan="2">
+           <input class="left" data-id="163296" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-white key-closed ">
+          <td class="sectionNumber">
+           33
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           4653
+          </td>
+          <td>
+           Swanson,Justin Andrew
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           MW
+          </td>
+          <td>
+           8:10 PM
+          </td>
+          <td>
+           10:00 PM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178596">
+            <i class="map-gray">
+            </i>
+            <span>
+             0311
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray">
+          <td rowspan="2">
+           <input checked="true" class="left" data-id="163295" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-gray ">
+          <td class="sectionNumber">
+           34
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           4654
+          </td>
+          <td>
+           Wishnewsky,Sarah M
+          </td>
+          <td>
+           2
+          </td>
+          <td>
+           20
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           Open
+          </td>
+          <td>
+           MW
+          </td>
+          <td>
+           8:10 PM
+          </td>
+          <td>
+           10:00 PM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178597">
+            <i class="map-gray">
+            </i>
+            <span>
+             0210
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white">
+          <td rowspan="2">
+           <input class="left" data-id="163294" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-white key-closed ">
+          <td class="sectionNumber">
+           35
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           4655
+          </td>
+          <td>
+           Senn,Melanie R
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           1
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           TR
+          </td>
+          <td>
+           6:10 PM
+          </td>
+          <td>
+           8:00 PM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178598">
+            <i class="map-gray">
+            </i>
+            <span>
+             0218
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray">
+          <td rowspan="2">
+           <input class="left" data-id="163396" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td class="sectionNumber">
+           36
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           4953
+          </td>
+          <td>
+           Bradfield,Scott M
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           MW
+          </td>
+          <td>
+           7:10 PM
+          </td>
+          <td>
+           9:00 PM
+          </td>
+          <td>
+           Alan A Erhart Agriculture - 10
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178672">
+            <i class="map-gray">
+            </i>
+            <span>
+             0227
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white">
+          <td rowspan="2">
+           <input class="left" data-id="163293" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-white key-closed ">
+          <td class="sectionNumber">
+           37
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           4954
+          </td>
+          <td>
+           Senn,Melanie R
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           23
+          </td>
+          <td>
+           2
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           TR
+          </td>
+          <td>
+           4:10 PM
+          </td>
+          <td>
+           6:00 PM
+          </td>
+          <td>
+           Engineering West - 21
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178601">
+            <i class="map-gray">
+            </i>
+            <span>
+             0235
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray">
+          <td rowspan="2">
+           <input class="left" data-id="163292" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td class="sectionNumber">
+           38
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           4955
+          </td>
+          <td>
+           Swanson,Justin Andrew
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           23
+          </td>
+          <td>
+           1
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           TR
+          </td>
+          <td>
+           6:10 PM
+          </td>
+          <td>
+           8:00 PM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178602">
+            <i class="map-gray">
+            </i>
+            <span>
+             0311
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white">
+          <td rowspan="2">
+           <input class="left" data-id="163314" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-white key-closed ">
+          <td class="sectionNumber">
+           40
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           6861
+          </td>
+          <td>
+           Maddox,Sean Robert
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           TR
+          </td>
+          <td>
+           6:10 PM
+          </td>
+          <td>
+           8:00 PM
+          </td>
+          <td>
+           Cochett Education Bldg - 02
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178637">
+            <i class="map-gray">
+            </i>
+            <span>
+             0205
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray">
+          <td rowspan="2">
+           <input class="left" data-id="163313" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td class="sectionNumber">
+           41
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           5169
+          </td>
+          <td>
+           Swanson,Justin Andrew
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           TR
+          </td>
+          <td>
+           8:10 PM
+          </td>
+          <td>
+           10:00 PM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178605">
+            <i class="map-gray">
+            </i>
+            <span>
+             0311
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white">
+          <td rowspan="2">
+           <input checked="true" class="left" data-id="163312" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-white ">
+          <td class="sectionNumber">
+           42
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           5170
+          </td>
+          <td>
+           Maddox,Sean Robert
+          </td>
+          <td>
+           1
+          </td>
+          <td>
+           21
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           Open
+          </td>
+          <td>
+           TR
+          </td>
+          <td>
+           8:10 PM
+          </td>
+          <td>
+           10:00 PM
+          </td>
+          <td>
+           Cochett Education Bldg - 02
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178606">
+            <i class="map-gray">
+            </i>
+            <span>
+             0205
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray">
+          <td rowspan="2">
+           <input class="left" data-id="163316" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td class="sectionNumber">
+           43
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           5168
+          </td>
+          <td>
+           Bartel,Jonathan Eric
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           1
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           MWRF
+          </td>
+          <td>
+           8:10 AM
+          </td>
+          <td>
+           9:00 AM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178604">
+            <i class="map-gray">
+            </i>
+            <span>
+             0219
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white">
+          <td rowspan="2">
+           <input class="left" data-id="163315" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-white key-closed ">
+          <td class="sectionNumber">
+           44
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           5171
+          </td>
+          <td>
+           Bates,Brian R
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           23
+          </td>
+          <td>
+           5
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           MTRF
+          </td>
+          <td>
+           12:10 PM
+          </td>
+          <td>
+           1:00 PM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178607">
+            <i class="map-gray">
+            </i>
+            <span>
+             0220
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray">
+          <td rowspan="2">
+           <input class="left" data-id="163391" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td class="sectionNumber">
+           45
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           5172
+          </td>
+          <td>
+           Marini,Amelia Lynn
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           TWRF
+          </td>
+          <td>
+           8:10 AM
+          </td>
+          <td>
+           9:00 AM
+          </td>
+          <td>
+           Engineering IV - 192
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178664">
+            <i class="map-gray">
+            </i>
+            <span>
+             0242
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white">
+          <td rowspan="2">
+           <input class="left" data-id="163406" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-white key-closed ">
+          <td class="sectionNumber">
+           46
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           5178
+          </td>
+          <td>
+           Ghori,Hajera Anees
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           MTRF
+          </td>
+          <td>
+           8:10 AM
+          </td>
+          <td>
+           9:00 AM
+          </td>
+          <td>
+           Alan A Erhart Agriculture - 10
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178684">
+            <i class="map-gray">
+            </i>
+            <span>
+             0226
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td>
+           <input class="left" data-id="159182" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td class="sectionNumber">
+           47
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           5180
+          </td>
+          <td>
+           Gotsick,Jonathan Sawyer
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           4
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           MWRF
+          </td>
+          <td>
+           3:10 PM
+          </td>
+          <td>
+           4:00 PM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=175778">
+            <i class="map-gray">
+            </i>
+            <span>
+             0219
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white">
+          <td rowspan="2">
+           <input checked="true" class="left" data-id="163405" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-white ">
+          <td class="sectionNumber">
+           49
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           6859
+          </td>
+          <td>
+           Erdiakoff,Harrison
+          </td>
+          <td>
+           1
+          </td>
+          <td>
+           21
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           Open
+          </td>
+          <td>
+           MTWF
+          </td>
+          <td>
+           4:10 PM
+          </td>
+          <td>
+           5:00 PM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178686">
+            <i class="map-gray">
+            </i>
+            <span>
+             0311
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray">
+          <td rowspan="2">
+           <input class="left" data-id="163393" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td class="sectionNumber">
+           50
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           5190
+          </td>
+          <td>
+           Brinkmeyer,Emma E
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           23
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           MW
+          </td>
+          <td>
+           6:10 PM
+          </td>
+          <td>
+           8:00 PM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178666">
+            <i class="map-gray">
+            </i>
+            <span>
+             0210
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white">
+          <td rowspan="2">
+           <input class="left" data-id="163318" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-white key-closed ">
+          <td class="sectionNumber">
+           51
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           5191
+          </td>
+          <td>
+           Swanson,Justin Andrew
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           1
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           MW
+          </td>
+          <td>
+           6:10 PM
+          </td>
+          <td>
+           8:00 PM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178608">
+            <i class="map-gray">
+            </i>
+            <span>
+             0311
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray">
+          <td rowspan="2">
+           <input class="left" data-id="163392" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td class="sectionNumber">
+           52
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           5192
+          </td>
+          <td>
+           Sanders,Kristin D
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           23
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           MW
+          </td>
+          <td>
+           6:10 PM
+          </td>
+          <td>
+           8:00 PM
+          </td>
+          <td>
+           Baker Center Sci &amp; Math - 180
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178667">
+            <i class="map-gray">
+            </i>
+            <span>
+             0112
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white">
+          <td rowspan="2">
+           <input class="left" data-id="163319" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-white key-closed ">
+          <td class="sectionNumber">
+           57
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           14503
+          </td>
+          <td>
+           St. John,Leslie A
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           23
+          </td>
+          <td>
+           7
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           TR
+          </td>
+          <td>
+           11:10 AM
+          </td>
+          <td>
+           1:00 PM
+          </td>
+          <td>
+           Alan A Erhart Agriculture - 10
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178631">
+            <i class="map-gray">
+            </i>
+            <span>
+             0231
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td>
+           <input class="left" data-id="163436" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td class="sectionNumber">
+           58
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           14504
+          </td>
+          <td>
+           Marini,Amelia Lynn
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           24
+          </td>
+          <td>
+           12
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           TR
+          </td>
+          <td>
+           10:10 AM
+          </td>
+          <td>
+           12:00 PM
+          </td>
+          <td>
+           Computer Science - 14
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178720">
+            <i class="map-gray">
+            </i>
+            <span>
+             0252
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white">
+          <td rowspan="2">
+           <input class="left" data-id="163320" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-white key-closed ">
+          <td class="sectionNumber">
+           60
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           14729
+          </td>
+          <td>
+           Martin-Elston,Erin J
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           TWRF
+          </td>
+          <td>
+           7:10 AM
+          </td>
+          <td>
+           8:00 AM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178634">
+            <i class="map-gray">
+            </i>
+            <span>
+             0211
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray">
+          <td rowspan="2">
+           <input class="left" data-id="163395" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td class="sectionNumber">
+           62
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           14843
+          </td>
+          <td>
+           Pignatelli,Savannah Kathlene
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           MW
+          </td>
+          <td>
+           6:10 PM
+          </td>
+          <td>
+           8:00 PM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178669">
+            <i class="map-gray">
+            </i>
+            <span>
+             0212
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white">
+          <td rowspan="2">
+           <input class="left" data-id="163400" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-white key-closed ">
+          <td class="sectionNumber">
+           65
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           14849
+          </td>
+          <td>
+           Anderson,Kevin B
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           23
+          </td>
+          <td>
+           3
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           TR
+          </td>
+          <td>
+           2:10 PM
+          </td>
+          <td>
+           4:00 PM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178675">
+            <i class="map-gray">
+            </i>
+            <span>
+             0313
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td>
+           <input class="left" data-id="163481" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td class="sectionNumber">
+           66
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           14852
+          </td>
+          <td>
+           Belknap,Jacquelyn N
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           22
+          </td>
+          <td>
+           5
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           TR
+          </td>
+          <td>
+           9:10 AM
+          </td>
+          <td>
+           11:00 AM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178772">
+            <i class="map-gray">
+            </i>
+            <span>
+             0314
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white">
+          <td rowspan="2">
+           <input class="left" data-id="163435" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Seats are reserved for new freshman or transfer students. Any remaining seats will be made available to all students on the first day of open enrollment.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-white key-closed ">
+          <td class="sectionNumber">
+           67
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           14897
+          </td>
+          <td>
+           Martin-Elston,Erin J
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           20
+          </td>
+          <td>
+           1
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           TWRF
+          </td>
+          <td>
+           8:10 AM
+          </td>
+          <td>
+           9:00 AM
+          </td>
+          <td>
+           English - 22
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=59674&amp;meetingId=178721">
+            <i class="map-gray">
+            </i>
+            <span>
+             0218
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+      <div class="select-course">
+       <h3 class="">
+        CPE  464 - Introduction to Computer Networks — Units:
+						4
+        <a class="view-map" href="map.html?type=course&amp;courseId=60444">
+         <i class="map-white">
+         </i>
+         <span>
+          View all sections on map
+         </span>
+        </a>
+       </h3>
+       <table class="no-bg">
+        <thead>
+         <tr>
+          <th>
+           Include
+          </th>
+          <th>
+           Sec.
+          </th>
+          <th>
+           Type
+          </th>
+          <th>
+           Class #
+          </th>
+          <th>
+           Instructor
+          </th>
+          <th>
+           Avail.
+          </th>
+          <th>
+           Taken
+          </th>
+          <th>
+           Waiting
+          </th>
+          <th>
+           Status
+          </th>
+          <th>
+           Days
+          </th>
+          <th>
+           Start
+          </th>
+          <th>
+           End
+          </th>
+          <th>
+           Building
+          </th>
+          <th>
+           Room
+          </th>
+          <th>
+           Books
+          </th>
+         </tr>
+        </thead>
+        <tbody>
+         <tr class="row-gray key-closed ">
+          <td>
+           <input class="left" data-id="159248" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td class="sectionNumber">
+           01
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           6961
+          </td>
+          <td>
+           Smith,Hugh M
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           25
+          </td>
+          <td>
+           54
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           TR
+          </td>
+          <td>
+           12:10 PM
+          </td>
+          <td>
+           1:30 PM
+          </td>
+          <td>
+           Engineering East - 20
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=60444&amp;meetingId=177523">
+            <i class="map-gray">
+            </i>
+            <span>
+             0140
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white key-closed ">
+          <td>
+           <input class="left" data-id="159249" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td class="sectionNumber">
+           02
+          </td>
+          <td>
+           LAB
+          </td>
+          <td>
+           6962
+          </td>
+          <td>
+           Smith,Hugh M
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           25
+          </td>
+          <td>
+           54
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           W
+          </td>
+          <td>
+           12:10 PM
+          </td>
+          <td>
+           3:00 PM
+          </td>
+          <td>
+           Engineering East - 20
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=60444&amp;meetingId=177524">
+            <i class="map-gray">
+            </i>
+            <span>
+             0124
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td>
+           <input class="left" data-id="162737" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td class="sectionNumber">
+           03
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           13903
+          </td>
+          <td>
+           Ghanbari,Muhammad K
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           30
+          </td>
+          <td>
+           29
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           MWF
+          </td>
+          <td>
+           8:10 AM
+          </td>
+          <td>
+           9:00 AM
+          </td>
+          <td>
+           Computer Science - 14
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=60444&amp;meetingId=177856">
+            <i class="map-gray">
+            </i>
+            <span>
+             0246
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white key-closed ">
+          <td>
+           <input class="left" data-id="162738" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td class="sectionNumber">
+           04
+          </td>
+          <td>
+           LAB
+          </td>
+          <td>
+           13904
+          </td>
+          <td>
+           Ghanbari,Muhammad K
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           30
+          </td>
+          <td>
+           29
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           M
+          </td>
+          <td>
+           9:10 AM
+          </td>
+          <td>
+           12:00 PM
+          </td>
+          <td>
+           Engineering East - 20
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=60444&amp;meetingId=177857">
+            <i class="map-gray">
+            </i>
+            <span>
+             0124
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+      <div class="select-course">
+       <h3 class="">
+        CPE  329 - Programmable Logic and Microprocessor-Based Systems Design — Units:
+						4
+        <a class="view-map" href="map.html?type=course&amp;courseId=60007">
+         <i class="map-white">
+         </i>
+         <span>
+          View all sections on map
+         </span>
+        </a>
+       </h3>
+       <table class="no-bg">
+        <thead>
+         <tr>
+          <th>
+           Include
+          </th>
+          <th>
+           Sec.
+          </th>
+          <th>
+           Type
+          </th>
+          <th>
+           Class #
+          </th>
+          <th>
+           Instructor
+          </th>
+          <th>
+           Avail.
+          </th>
+          <th>
+           Taken
+          </th>
+          <th>
+           Waiting
+          </th>
+          <th>
+           Status
+          </th>
+          <th>
+           Days
+          </th>
+          <th>
+           Start
+          </th>
+          <th>
+           End
+          </th>
+          <th>
+           Building
+          </th>
+          <th>
+           Room
+          </th>
+          <th>
+           Books
+          </th>
+         </tr>
+        </thead>
+        <tbody>
+         <tr class="row-gray">
+          <td rowspan="2">
+           <input class="left" data-id="161183" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Contact department for permission to enroll. Please do not contact the professor. Come into the EE office (Bldg. 20A, Room 200) to fill out the permission form.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-gray key-closed ">
+          <td class="sectionNumber">
+           01
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           2770
+          </td>
+          <td>
+           Irber,Alfred
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           32
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           TR
+          </td>
+          <td>
+           8:10 AM
+          </td>
+          <td>
+           9:30 AM
+          </td>
+          <td>
+           Engineering East - 20
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=60007&amp;meetingId=173967">
+            <i class="map-gray">
+            </i>
+            <span>
+             0100
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white key-closed ">
+          <td>
+           <input class="left" data-id="161184" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td class="sectionNumber">
+           02
+          </td>
+          <td>
+           LAB
+          </td>
+          <td>
+           2771
+          </td>
+          <td>
+           Irber,Alfred
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           32
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           Closed
+          </td>
+          <td>
+           TR
+          </td>
+          <td>
+           9:40 AM
+          </td>
+          <td>
+           11:00 AM
+          </td>
+          <td>
+           Engineering East - 20
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=60007&amp;meetingId=173968">
+            <i class="map-gray">
+            </i>
+            <span>
+             0100
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-gray">
+          <td rowspan="2">
+           <input checked="true" class="left" data-id="161181" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td colspan="100%">
+           <div class="section-notes">
+            <div>
+             <strong>
+              Section Notes:
+             </strong>
+             Contact department for permission to enroll. Please do not contact the professor. Come into the EE office (Bldg. 20A, Room 200) to fill out the permission form.
+            </div>
+           </div>
+          </td>
+         </tr>
+         <tr class="row-gray ">
+          <td class="sectionNumber">
+           03
+          </td>
+          <td>
+           LEC
+          </td>
+          <td>
+           4487
+          </td>
+          <td>
+           Irber,Alfred
+          </td>
+          <td>
+           3
+          </td>
+          <td>
+           29
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           Open
+          </td>
+          <td>
+           TR
+          </td>
+          <td>
+           3:10 PM
+          </td>
+          <td>
+           4:30 PM
+          </td>
+          <td>
+           Engineering East - 20
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=60007&amp;meetingId=175157">
+            <i class="map-gray">
+            </i>
+            <span>
+             0100
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+         <tr class="row-white ">
+          <td>
+           <input checked="true" class="left" data-id="161182" name="checkbox-0" type="checkbox"/>
+          </td>
+          <td class="sectionNumber">
+           04
+          </td>
+          <td>
+           LAB
+          </td>
+          <td>
+           4488
+          </td>
+          <td>
+           Irber,Alfred
+          </td>
+          <td>
+           3
+          </td>
+          <td>
+           29
+          </td>
+          <td>
+           0
+          </td>
+          <td>
+           Open
+          </td>
+          <td>
+           TR
+          </td>
+          <td>
+           4:40 PM
+          </td>
+          <td>
+           6:00 PM
+          </td>
+          <td>
+           Engineering East - 20
+          </td>
+          <td>
+           <a class="map-link" href="map.html?type=meeting&amp;courseId=60007&amp;meetingId=175158">
+            <i class="map-gray">
+            </i>
+            <span>
+             0100
+            </span>
+           </a>
+          </td>
+          <td>
+           <a href="login.do">
+            Log in to view books
+           </a>
+          </td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="nav-top clearfix" id="navbar">
+   <ul class="nav list-plain">
+    <li>
+     <a href="http://registrar.calpoly.edu/" target="_blank">
+      Registration Info
+     </a>
+    </li>
+    <li>
+     <a href="http://www.registrar.calpoly.edu/content/schedule-classes" target="_blank">
+      Class Schedule
+     </a>
+    </li>
+    <li>
+     <a href="http://catalog.calpoly.edu/" target="_blank">
+      Cal Poly Catalog
+     </a>
+    </li>
+    <li>
+     <a href="main.html?site_preference=mobile">
+      Mobile Version
+     </a>
+    </li>
+    <li>
+     <a href="mailto:registrar@calpoly.edu">
+      Feedback
+     </a>
+    </li>
+   </ul>
+  </div>
+  <div class="modal hidden" id="waitModal">
+   <div class="modal-info">
+    <h1>
+     Generating schedules. Please wait.
+    </h1>
+    <div class="ajax-load">
+    </div>
+   </div>
+  </div>
+  <script src="js/desktop/scheduler.js?v=6e2bee57be695de5dc763330ae33b4c2">
+  </script>
+  <script src="js/desktop/section.js?v=6e2bee57be695de5dc763330ae33b4c2">
+  </script>
+  <script src="js/desktop/general.js?v=6e2bee57be695de5dc763330ae33b4c2" type="&lt;script">
+  </script>
+  <script src="js/desktop/filterBox.js?v=6e2bee57be695de5dc763330ae33b4c2">
+  </script>
+  <script src="js/desktop/mustache.js?v=6e2bee57be695de5dc763330ae33b4c2">
+  </script>
+  <script src="js/desktop/bookPopup.js?v=6e2bee57be695de5dc763330ae33b4c2">
+  </script>
+  <script src="js/desktop/jquery.qtip.min.js">
+  </script>
+  <script id="cartRow" type="text/template">
+   &lt;li class = "clearfix"&gt;
+	&lt;div class = "left"&gt;{{subject}} {{catalogNumber}} - {{title}}&lt;/div&gt;
+	&lt;a class = "detail cart-action" data-id="{{id}}"&gt;Remove&lt;/a&gt;
+	&lt;/li&gt;
+  </script>
+  <script id="cartRmAllRow" type="text/template">
+   &lt;li id="cart-list-divider"&gt;Selected Courses&lt;a id = "removeAllCourses" class = "detail cart-action"&gt;Remove All&lt;/a&gt;&lt;/li&gt;
+  </script>
+ </body>
+</html>
