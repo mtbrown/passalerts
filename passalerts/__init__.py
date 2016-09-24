@@ -27,7 +27,9 @@ def main():
 
     while True:
         cur_courses = scrape_courses(subscriptions.keys(), config)
-        print_sections(cur_courses)
+
+        if config['Settings'].get('print', fallback='') == 'True':
+            print_sections(cur_courses)
 
         with shelve.open(DB_FILE) as prev_courses:
             for event in check_events(subscriptions, prev_courses, cur_courses):

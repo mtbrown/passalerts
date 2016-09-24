@@ -1,5 +1,4 @@
 from selenium import webdriver
-from tabulate import tabulate
 from collections import namedtuple
 from bs4 import BeautifulSoup, NavigableString
 import logging
@@ -88,6 +87,12 @@ def parse_sections(soup, course_list):
 
 
 def print_sections(section_info):
+    try:
+        from tabulate import tabulate
+    except ImportError:
+        logging.error('Unable to print section info, "tabulate" package required')
+        return
+
     for course, sections in section_info.items():
         print(tabulate([info for _, info in sections.items()], headers=Section._fields))
         print()
