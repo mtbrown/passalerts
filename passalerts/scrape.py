@@ -54,7 +54,7 @@ def select_courses(driver, course_list):
 
 
 def parse_sections(soup, course_list):
-    section_info = dict.fromkeys(course_list)
+    section_info = {key: {} for key in course_list}
 
     selected_courses = soup.find_all(class_="select-course")
     for course in selected_courses:
@@ -63,7 +63,6 @@ def parse_sections(soup, course_list):
         if course_name not in course_list:
             continue  # Skip classes that aren't in watch list, e.g. labs that are auto added
 
-        section_info[course_name] = {}
         for section in course.find_all("table"):
             for row in section.tbody:
                 if isinstance(row, NavigableString) or row.find(class_="section-notes"):
