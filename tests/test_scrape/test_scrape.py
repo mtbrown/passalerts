@@ -1,5 +1,9 @@
 from passalerts.scrape import Section, parse_sections
 from bs4 import BeautifulSoup
+import os
+
+
+TEST_DIR = os.path.dirname(os.path.realpath(__file__))
 
 test_config = {
     'Settings': {
@@ -10,14 +14,14 @@ test_config = {
     'Notifications': {
         'service': 'pushbullet',
         'api_key': None
-    }
+    }1
 }
 
 course_list = ['EE 308', 'ENGL 134', 'CPE 464', 'CPE 329']
 
 
 def test_parse_sections():
-    soup = BeautifulSoup(open('test.html').read(), 'html.parser')
+    soup = BeautifulSoup(open(os.path.join(TEST_DIR, 'test.html')).read(), 'html.parser')
     result = parse_sections(soup, course_list)
 
     assert result == {
@@ -98,9 +102,4 @@ def test_parse_sections_empty():
     soup = BeautifulSoup('', 'html.parser')
     result = parse_sections(soup, course_list)
 
-    assert result == {
-        'CPE 329': {},
-        'CPE 464': {},
-        'EE 308': {},
-        'ENGL 134': {}
-    }
+    assert result == {course: {} for course in course_list}
