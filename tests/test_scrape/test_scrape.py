@@ -14,7 +14,7 @@ test_config = {
     'Notifications': {
         'service': 'pushbullet',
         'api_key': None
-    }1
+    }
 }
 
 course_list = ['EE 308', 'ENGL 134', 'CPE 464', 'CPE 329']
