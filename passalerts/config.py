@@ -1,7 +1,9 @@
-import configparser
 import logging
 from collections import namedtuple
-
+try:
+    import configparser
+except ImportError:
+    import ConfigParser as configparser
 
 # Specifies the required sections and parameters expected in the configuration file.
 # The first level describes required sections, and the second level described required
